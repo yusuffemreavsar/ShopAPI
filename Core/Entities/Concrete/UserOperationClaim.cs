@@ -2,8 +2,8 @@
 {
     public class UserOperationClaim: BaseEntity
     {
-        public int UserId { get; set; }
-        public int OperationClaimId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid OperationClaimId { get; set; }
         public User User { get; set; }
         public OperationClaim OperationClaim { get; set; }
     }

@@ -11,6 +11,6 @@ namespace DataAccess.Context
 
         DbSet<User> Users { get; set; }
         DbSet<OperationClaim> OperationClaims { get; set; }
-        DbSet<UserOperationClaim> UserOperations { get; set; }
+        DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }
