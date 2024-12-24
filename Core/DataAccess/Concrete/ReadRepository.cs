@@ -29,6 +29,8 @@ namespace Core.DataAccess.Concrete
             throw new NotImplementedException();
         }
 
+      
+
         public Task<T> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();

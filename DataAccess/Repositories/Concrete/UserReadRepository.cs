@@ -2,6 +2,7 @@
 using Core.Entities.Concrete;
 using DataAccess.Context;
 using DataAccess.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories.Concrete
 {
@@ -10,6 +11,13 @@ namespace DataAccess.Repositories.Concrete
         public UserReadRepository(ShopAPIDbContext shopAPIDbContext): base(shopAPIDbContext)
         {
             
+        }
+
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            User? user= await Table.SingleOrDefaultAsync(u=>u.Email == email);
+
+            return user;
         }
     }
 }
