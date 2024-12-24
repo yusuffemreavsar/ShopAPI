@@ -14,9 +14,14 @@ namespace Core.DataAccess.Concrete
 
         public DbSet<T> Table => _dbContext.Set<T>();
 
-        public Task<T> CreateAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            if(entity != null)
+            {
+              Table.Add(entity);
+              _dbContext.SaveChanges();
+            }
+            return entity;
         }
 
         public Task<T> DeleteAsync(T entity)
