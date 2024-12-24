@@ -19,7 +19,7 @@ namespace Core.DataAccess.Concrete
             if(entity != null)
             {
               Table.Add(entity);
-              _dbContext.SaveChanges();
+              await _dbContext.SaveChangesAsync();
             }
             return entity;
         }

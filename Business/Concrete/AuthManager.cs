@@ -29,7 +29,9 @@ namespace Business.Concrete
 
         public async Task<RegisterResponseDto> Register(RegisterRequestDto registerRequestDto)
         {
-            _authBusinessRules.UserExistsAsync(registerRequestDto.Email);
+            // Kullanıcı zaten var mı kontrol et
+            await _authBusinessRules.UserExistsAsync(registerRequestDto.Email);
+
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(registerRequestDto.Password, out passwordHash, out passwordSalt);
 
@@ -42,14 +44,19 @@ namespace Business.Concrete
                 Email = registerRequestDto.Email,
                 CreatedDate = DateTime.UtcNow,
             };
+
+            // Kullanıcıyı asenkron olarak ekle
             await _userWriteRepository.AddAsync(user);
-            RegisterResponseDto registerResponseDto = new RegisterResponseDto() {
+
+            var registerResponseDto = new RegisterResponseDto()
+            {
                 Email = registerRequestDto.Email,
                 Succeeded = true
             };
-            return registerResponseDto;
 
+            return registerResponseDto;
         }
+
     }
 }
 

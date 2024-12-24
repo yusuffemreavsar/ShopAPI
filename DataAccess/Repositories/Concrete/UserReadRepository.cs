@@ -8,14 +8,17 @@ namespace DataAccess.Repositories.Concrete
 {
     public class UserReadRepository: ReadRepository<User> ,IUserReadRepository
     {
+      
         public UserReadRepository(ShopAPIDbContext shopAPIDbContext): base(shopAPIDbContext)
         {
-            
+           
         }
 
         public async Task<User> GetByEmailAsync(string email)
         {
-            User? user= await Table.SingleOrDefaultAsync(u=>u.Email == email);
+           
+              User? user = await Table.FirstOrDefaultAsync(u => u.Email == email);
+  
 
             return user;
         }

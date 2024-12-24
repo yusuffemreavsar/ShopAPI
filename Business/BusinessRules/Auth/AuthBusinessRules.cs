@@ -12,14 +12,13 @@ namespace Business.BusinessRules.Auth
         }
 
 
-        public async void UserExistsAsync(string email)
+        public async Task UserExistsAsync(string email)
         {
             var user = await _userReadRepository.GetByEmailAsync(email);
-            if (user == null)
+            if (user != null)
             {
-                throw new Exception($"User with email '{email}' not found.");
+                throw new Exception($"User with email '{email}' found.");
             }
-           
         }
 
     }
