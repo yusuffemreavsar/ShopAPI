@@ -22,14 +22,15 @@ namespace Business.Concrete
             _authBusinessRules = authBusinessRules;
         }
 
-        public Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
+        public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
-            throw new NotImplementedException();
+            await _authBusinessRules.UserExistsAsync(loginRequestDto.Email);
+
+
         }
 
         public async Task<RegisterResponseDto> Register(RegisterRequestDto registerRequestDto)
         {
-            // Kullanıcı zaten var mı kontrol et
             await _authBusinessRules.UserExistsAsync(registerRequestDto.Email);
 
             byte[] passwordHash, passwordSalt;
@@ -45,7 +46,7 @@ namespace Business.Concrete
                 CreatedDate = DateTime.UtcNow,
             };
 
-            // Kullanıcıyı asenkron olarak ekle
+            
             await _userWriteRepository.AddAsync(user);
 
             var registerResponseDto = new RegisterResponseDto()

@@ -14,7 +14,7 @@ namespace Core.DataAccess.Concrete
         }
         public DbSet<T> Table => _dbContext.Set<T>();
 
-        public Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        public Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate)
         {
             throw new NotImplementedException();
         }
